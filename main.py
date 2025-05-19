@@ -113,7 +113,7 @@ def draw_game_over(screen, board):
 def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption('Chess - Play Both Sides')
+    pygame.display.set_caption('Chess')
     clock = pygame.time.Clock()
     board = chess.Board()
 
@@ -123,13 +123,15 @@ def main():
     running = True
     while running:
         draw_board(screen, board)
-        # Highlight selected square and legal moves before flipping display
+
+        # Highlight selected piece and legal moves
         if selected_square is not None:
             highlight_legal_moves(screen, board, selected_square)
 
         pygame.display.flip()
         clock.tick(FPS)
 
+        # Handle mouse clicks
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -157,6 +159,7 @@ def main():
             draw_board(screen, board)
             pygame.display.flip()
             pygame.time.wait(200)
+    # end while
 
     # when the game is over, display the result
     draw_game_over(screen, board)
